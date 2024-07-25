@@ -1,30 +1,64 @@
 import React from "react";
+import { useState } from "react";
+import MenuIcon from "@mui/icons-material/Menu";
+import CloseIcon from "@mui/icons-material/Close";
+import { Link } from "react-scroll";
 
 const Header = () => {
+  const navLists = [
+    { text: "About", id: "about" },
+    { text: "Skills", id: "skill" },
+    { text: "Projects", id: "project" },
+    { text: "Contact", id: "contact" },
+  ];
+  const [navShow, setNavShow] = useState(false);
+
   return (
-    <header className="primary-header">
+    <header id="header" className="primary-header">
       <div className="container">
         <div className="nav-wrapper">
-          <div>
-            <h2 className="fw-semi-bold fs-secondary-heading">Kenneth</h2>
+          <h2 className="fw-bold fs-subheading">Kenneth</h2>
+
+          <div className="mobile-nav-btn">
+            {navShow ? (
+              <CloseIcon
+                style={{
+                  color: "white",
+                  position: "fixed",
+                  right: "25px",
+                  top: "50px",
+                }}
+                onClick={() => setNavShow(!navShow)}
+              />
+            ) : (
+              <MenuIcon onClick={() => setNavShow(!navShow)} />
+            )}
           </div>
-          <nav className="primary-navigation">
+
+          <nav
+            className={
+              navShow ? "primary-navigation nav-show" : "primary-navigation"
+            }
+          >
             <ul className="nav-lists">
-              <li>
-                <a href="#">About</a>
-              </li>
-              <li>
-                <a href="#">Services</a>
-              </li>
-              <li>
-                <a href="#">Projects</a>
-              </li>
-              <li>
-                <a href="#">Skills</a>
-              </li>
-              <li>
-                <a href="#">Contact</a>
-              </li>
+              {navLists.map((navList, index) => (
+                <li key={index}>
+                  <Link
+                    to={navList.id}
+                    spy={true}
+                    smooth={true}
+                    offset={0}
+                    duration={500}
+                    onClick={() => {
+                      if (navShow) {
+                        setNavShow(!navShow);
+                      }
+                    }}
+                  >
+                    {navList.text}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </nav>
         </div>
