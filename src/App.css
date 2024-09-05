@@ -407,11 +407,12 @@ body {
   display: grid;
   grid-auto-flow: column;
   grid-auto-columns: 1fr;
+  /* grid-template-columns: 1fr 1fr; */
   gap: 2rem;
   margin-inline: auto;
 }
 
-@media (max-width: 50em) {
+@media (max-width: 57em) {
   .about-wrapper {
     grid-template-areas:
       "one"
@@ -439,12 +440,10 @@ body {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: var(--size-400);
+  justify-items: center;
 }
 
 .grid-wrap > * {
-  justify-self: center;
-  text-align: right;
-
   display: flex;
   gap: var(--size-400);
 }
